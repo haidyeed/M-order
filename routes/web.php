@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{AuthController};
-use App\Http\Controllers\Front\{UserController};
+use App\Http\Controllers\Front\{UserController,CartController};
 use App\Http\Controllers\Dashboard\{AdminController,ProductController};
 
 
@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['middleware' => ['auth', 'role:user']], function () {
     Route::get('/cart', [UserController::class, 'cart'])->name('cart');
     Route::get('/checkout', [UserController::class, 'checkout'])->name('checkout');
+    Route::post('/addToCart', [CartController::class, 'addToCart'])->name('cart.add');
 
 });
 

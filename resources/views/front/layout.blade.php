@@ -195,58 +195,42 @@
                     <div class="nav-cart-outer">
                       <div class="nav-cart-inner">
                         <a href="{{ route('cart') }}" class="nav-cart-icon">
-                          0
+                          {{ $cartCount }}
                         </a>
                       </div>
                     </div>
                     <div class="nav-cart-container">
                       <div class="nav-cart-items">
 
+                      @forelse($cartItems as $item)
                         <div class="nav-cart-item clearfix">
                           <div class="nav-cart-img">
                             <a href="#">
-                              <img src="img/shop/shop_item_1.jpg" alt="">
+                              <img src="{{ asset('front/assets/img/shop/shop_item_1.jpg')}}" alt="">
                             </a>
                           </div>
                           <div class="nav-cart-title">
                             <a href="#">
-                              Ladies Bag
+                              {{$item->product->name}}
                             </a>
                             <div class="nav-cart-price">
-                              <span>1 x</span>
-                              <span>1250.00</span>
+                              <span>{{$item->quantity}} x</span>
+                              <span>{{$item->price}}</span>
                             </div>
                           </div>
                           <div class="nav-cart-remove">
                             <a href="#" class="remove"><i class="ui-close"></i></a>
                           </div>
                         </div>
-
-                        <div class="nav-cart-item clearfix">
-                          <div class="nav-cart-img">
-                            <a href="#">
-                              <img src="img/shop/shop_item_2.jpg" alt="">
-                            </a>
-                          </div>
-                          <div class="nav-cart-title">
-                            <a href="#">
-                              Sequin Suit longer title
-                            </a>
-                            <div class="nav-cart-price">
-                              <span>1 x</span>
-                              <span>1250.00</span>
-                            </div>
-                          </div>
-                          <div class="nav-cart-remove">
-                            <a href="#" class="remove"><i class="ui-close"></i></a>
-                          </div>
-                        </div>
+                      @empty
+                      <p> no products yet!</p>
+                      @endforelse
 
                       </div> <!-- end cart items -->
 
                       <div class="nav-cart-summary">
                         <span>Cart Subtotal</span>
-                        <span class="total-price">$1799.00</span>
+                        <span class="total-price">{{$cartSubtotal}}</span>
                       </div>
 
                       <div class="nav-cart-actions mt-20">
