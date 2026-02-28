@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\{RegisterRequest, LoginRequest};
 use Illuminate\Support\Facades\{Auth, Session};
 use App\Models\User;
@@ -41,20 +42,39 @@ class AuthController extends Controller
         return redirect('/')->with('success', "Account successfully registered.");
     }
 
-    public function login(LoginRequest $request){
-        $credentials = $request->only('email','password');
+    /**
+     * Handle account login request
+     * 
+     * @param LoginRequest $request
+     * 
+     */
+    public function login(LoginRequest $request)
+    {
+        $credentials = $request->getCredentials();
 
-        if(Auth::attempt($credentials)){
-            $request->session()->regenerate();
-
-            if(Auth::user()->role === 'admin'){
-                return redirect()->route('admin.dashboard');
-
-            }
-            return redirect()->intended('/cart');
-
+        if (!Auth::validate($credentials)) {
+            return redirect()->to('login')
+                ->withErrors(trans('auth.failed'));
         }
-        return back()->withErrors(['email','Invalid Credentials']);
+
+        $user = Auth::getProvider()->retrieveByCredentials($credentials);
+        Auth::login($user);
+        return $this->authenticated($request, $user);
+    }
+
+
+    /**
+     * Handle response after user authenticated
+     * 
+     * @param Request $request
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        if(Auth::user()->role === 'admin'){
+            return redirect()->intended('/admin/dashboard');        }
+        return redirect()->intended('/');
     }
 
     /**
@@ -66,6 +86,6 @@ class AuthController extends Controller
     {
         Session::flush();
         Auth::logout();
-        return redirect('login');
+        return redirect('/');
     }
 }
