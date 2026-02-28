@@ -63,81 +63,9 @@
 
           <div class="row items-grid">              
 
-            <div class="col-md-3 col-xs-6">
-              <div class="product-item hover-trigger">
-                <div class="product-img">
-                  <a href="shop-single.html">
-                    <img src="{{ asset('front/assets/img/shop/shop_item_1.jpg')}}" alt="">
-                  </a>
-                  <div class="product-label">
-                    <span class="sale">sale</span>
-                  </div>
-                  <div class="hover-overlay">                    
-                    <div class="product-actions">
-                      <a href="#" class="product-add-to-wishlist">
-                        <i class="fa fa-heart"></i>
-                      </a>
-                    </div>
-                    <div class="product-details valign">
-                      <span class="category">
-                        <a href="catalogue-grid.html">Women</a>
-                      </span>
-                      <h3 class="product-title">
-                        <a href="shop-single.html">Drawstring Dress</a>
-                      </h3>
-                      <span class="price">
-                        <del>
-                          <span>$730.00</span>
-                        </del>
-                        <ins>
-                          <span class="amount">$399.99</span>
-                        </ins>
-                      </span>
-                      <div class="btn-quickview">
-                        <a href="#" class="btn btn-md btn-color">
-                        <span>Quickview</span>
-                      </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3 col-xs-6">
-              <div class="product-item hover-trigger">
-                <div class="product-img">
-                  <a href="shop-single.html">
-                    <img src="{{ asset('front/assets/img/shop/shop_item_1.jpg')}}" alt="">
-                  </a>
-                  <div class="hover-overlay">                    
-                    <div class="product-actions">
-                      <a href="#" class="product-add-to-wishlist">
-                        <i class="fa fa-heart"></i>
-                      </a>
-                    </div>
-                    <div class="product-details valign">
-                      <span class="category">
-                        <a href="catalogue-grid.html">Accessories</a>
-                      </span>
-                      <h3 class="product-title">
-                        <a href="shop-single.html">Mesh Sandal</a>
-                      </h3>
-                      <span class="price">
-                        <ins>
-                          <span class="amount">$190.00</span>
-                        </ins>
-                      </span>
-                      <div class="btn-quickview">
-                        <a href="#" class="btn btn-md btn-color">
-                        <span>Quickview</span>
-                      </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          @foreach($products as $product)
+              <x-product :product="$product" />
+          @endforeach
 
           </div> <!-- end row -->
         </div>

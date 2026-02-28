@@ -16,18 +16,19 @@ jQuery(document).ready(function ($) {
               confirmButtonText: "Yes, delete it!",
               closeOnConfirm: false
           }, function () {
-         
+
               $.ajax(
                   {
                       url:  $route ,
-                      type: 'DELETE',
+                      type: 'POST',
                       data: {
-                          "_token": token,
+                        "_method": "DELETE",
+                        "_token": token,
                       },
                       success: function (){
                       }
                   });
-        
+
                   swal({
                       title: "Deleted",
                       text: "Your item has been deleted.",
@@ -40,25 +41,55 @@ jQuery(document).ready(function ($) {
                       location.reload();
                   });
           });
-        
+
     });
   });
   //end delete modal
 
-  //view task modal
-  $(document).on('click', '.viewTaskModal', function (event) {
-    $this = $(this);
-    $id = $this.attr('id');
-    $row = $this.attr('data-attr-row');
-    $title = $this.attr('data-attr-title');
-    $description = $this.attr('data-attr-description');
 
-    $('#view-task-id').text($id);
-    $('#view-task-row-number').val($row);
-    $('#view-task-title').text($title);
-    $('#view-task-description').text($description);
+  //change status for any model row
+  $(function () {
+    $('.change-status').on('click', function () {
 
+        $route=$(this).data("route");
+        $this = $(this);
+
+        $id = $this.attr('id');
+        $.ajax({
+          url: $route,
+          type: 'get',
+          dataType: 'JSON',
+          success: function (response) {
+            if (response['status'] == true) {
+              if (response['type'] == 1) {
+                $this.removeClass('tag-warning').addClass('tag-success');
+                swal("Status Changed", "Thank You For Your Trust!", "success");
+                $this.html('Active')
+              } else {
+                $this.removeClass('tag-success').addClass('tag-warning');
+                swal("Status Changed", "Thank You For Your Trust!", "success");
+                $this.html('Disabled');
+              }
+            }
+            if (response['is_open'] == true) {
+
+
+                $this.parents('tr').find(".editCategoryModal").attr('data-attr-is-open',response['type'])
+                $this.parents('tr').find(".viewCategoryModal").attr('data-attr-is-open',response['type'])
+              if (response['type'] == 1) {
+                $this.removeClass('tag-warning').addClass('tag-success');
+                swal("Category Opened", "Thank You For Your Trust!", "success");
+                $this.html('Active')
+              } else {
+                $this.removeClass('tag-success').addClass('tag-warning');
+                swal("Category Closed", "Thank You For Your Trust!", "success");
+                $this.html('Disabled');
+              }
+            }
+          }
+        });
+
+    });
   });
-  //end view task modal
-
+  //end change status
 });

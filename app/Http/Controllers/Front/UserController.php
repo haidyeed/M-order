@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,7 +14,18 @@ class UserController extends Controller
      * @return Renderable
      */
     public function showHome(){
-        return view('front.home');
+        $products = Product::active()->take(8)->get();
+        return view('front.home',compact('products'));
+    }
+
+    /**
+     * Display home page.
+     * 
+     * @return Renderable
+     */
+    public function showShop(){
+        $products = Product::active()->paginate(12);
+        return view('front.shop',compact('products'));
     }
 
     /**

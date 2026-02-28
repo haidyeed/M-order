@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{AuthController};
 use App\Http\Controllers\Front\{UserController};
-use App\Http\Controllers\Dashboard\{AdminController};
+use App\Http\Controllers\Dashboard\{AdminController,ProductController};
 
 
 //Authentication Routes
@@ -17,6 +17,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 //Front Routes
 Route::get('/', [UserController::class, 'showHome'])->name('home');
+Route::get('/shop', [UserController::class, 'showShop'])->name('shop');
 
 
 // Logout Route
@@ -36,4 +37,9 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
 //Admin Routes
 Route::group(['prefix' => 'admin','middleware' => ['auth', 'role:admin']], function () {
     Route::get('/dashboard', [AdminController::class, 'showDashboard'])->name('dashboard');
+
+    Route::get('/product/changeStatus/{id}', [ProductController::class, 'changeStatus'])->name('products.changeStatus');
+    Route::resources([
+        'products' => ProductController::class,
+    ]);
 });

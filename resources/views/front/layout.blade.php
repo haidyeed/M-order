@@ -121,7 +121,7 @@
                     </li>
 
                     <li class="dropdown">
-                      <a href="#">Shop</a>
+                      <a href="{{route('shop')}}">Shop</a>
                       <i class="fa fa-angle-down dropdown-trigger"></i>
                       <ul class="dropdown-menu megamenu-wide">
                         <li>

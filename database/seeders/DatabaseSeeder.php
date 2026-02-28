@@ -33,5 +33,9 @@ class DatabaseSeeder extends Seeder
 
         User::factory(100)->create();
 
+        $this->call([
+            ProductSeeder::class,
+        ]);
+
     }
 }

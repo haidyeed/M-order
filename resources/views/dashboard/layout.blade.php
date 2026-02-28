@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link rel="canonical" href="{{url()->current()}}" />
-<title>CIT Dashboard</title>
+<title>My Dashboard</title>
 
 <!-- Bootstrap Core and vandor -->
 <link rel="stylesheet" href="{{ asset('dashboard/assets/plugins/bootstrap/css/bootstrap.min.css') }}" />
@@ -46,7 +46,7 @@
 
     <!-- Start Main leftbar navigation -->
     <div id="left-sidebar" class="sidebar">
-        <h5 class="brand-name">CIT<a href="{{ route('dashboard') }}" class="menu_option float-right"></a></h5>
+        <h5 class="brand-name">My Dashboard<a href="{{ route('dashboard') }}" class="menu_option float-right"></a></h5>
         <ul class="nav nav-tabs">
             <li class="nav-item"><a href="#menu-uni" class="nav-link active">Admin</a></li>
         </ul>
@@ -56,7 +56,9 @@
                     <ul class="metismenu">
                         <li class="active"><a href="{{ route('dashboard') }}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a></li>
                         <li class="g_heading">Home</li>
-                        <li><a href="{{ route('dashboard') }}"><i class="fa fa-credit-card"></i><span>Dashboard/span></a></li>
+                        <li><a href="{{ route('dashboard') }}"><i class="fa fa-credit-card"></i><span>Dashboard</span></a></li>
+                        <li><a href="{{ route('products.index') }}"><i class="fa fa-credit-card"></i><span>Products</span></a></li>
+
                     </ul>
                 </nav>
             </div>
@@ -96,7 +98,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
-                            Copyright © {{ date('Y') }} Haidy Eed for CIT.
+                            Copyright © {{ date('Y') }} Haidy Eed.
                         </div>
                     </div>
                 </div>
