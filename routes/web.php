@@ -40,7 +40,11 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'role:admin']], funct
     Route::get('/dashboard', [AdminController::class, 'showDashboard'])->name('dashboard');
 
     Route::get('/product/changeStatus/{id}', [ProductController::class, 'changeStatus'])->name('products.changeStatus');
+    Route::get('/order/changeStatus/{id}/{status}', [OrderController::class, 'changeOrderStatus'])->name('change-order-status');
+
     Route::resources([
         'products' => ProductController::class,
+        'orders' => OrderController::class,
+
     ]);
 });
