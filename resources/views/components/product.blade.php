@@ -27,6 +27,15 @@
                     <span class="amount">${{$product->price}}</span>
                 </ins>
                 </span>
+
+                <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{ $product->id }}"> 
+                    <input type="number" name="quantity" value="1" min="1">
+                    <button type="submit" class="btn btn-md btn-color">
+                        <span>Add To Cart</span>
+                    </button>
+                </form>
                 <div class="btn-quickview">
                 <a href="#" class="btn btn-md btn-color">
                 <span>Quickview</span>
