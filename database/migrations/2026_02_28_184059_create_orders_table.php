@@ -15,9 +15,11 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->string('phone', 20);
+            $table->string('email')->nullable();
             $table->text('shipping_address')->nullable();
             $table->decimal('subtotal', 10, 2);
-            $table->decimal('shipping_price', 10, 2);
+            $table->decimal('shipping_price', 10, 2)->default(0.00);
             $table->decimal('total', 10, 2);
             $table->text('notes')->nullable();
             $table->enum('status', ['pending', 'viewed', 'shipped', 'canceled', 'refunded'])->default('pending');

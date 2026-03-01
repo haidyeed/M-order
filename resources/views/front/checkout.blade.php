@@ -30,54 +30,51 @@
 
             <div class="ecommerce col-xs-12">
 
-              <form name="checkout" class="checkout ecommerce-checkout row">
+              <form method="post" action="{{ route('order') }}" name="checkout" class="checkout ecommerce-checkout row">
 
+                @csrf
                 <div class="col-md-8" id="customer_details">
                   <div>
                     <h2 class="heading uppercase bottom-line full-grey mb-30">billing address</h2>
 
-                    <p class="form-row form-row-wide address-field validate-required ecommerce-invalid ecommerce-invalid-required-field" id="billing_address_1_field">
-                      <label for="billing_address_1">Address
+                    <p class="form-row form-row-wide address-field validate-required ecommerce-invalid ecommerce-invalid-required-field" id="address_field">
+                      <label for="address">Address
                         <abbr class="required" title="required">*</abbr>
                       </label>
-                      <input type="text" class="input-text" placeholder="Street address" value name="billing_address_1" id="billing_address_1">
+                      <input type="text" class="input-text" placeholder="Street address" name="address" id="address">
                     </p>
 
-                    <p class="form-row form-row-wide address-field" id="billing_address_2_field">
-                      <input type="text" class="input-text" placeholder="Apartment, suite, unit etc. (optional)" value name="billing_address_2" id="billing_address_2">
-                    </p>
-
-                    <p class="form-row form-row-wide address-field validate-required" id="billing_city_field" data-o_class="form-row form-row-wide address-field validate-required">
-                      <label for="billing_city">Town / City
+                    <p class="form-row form-row-wide address-field validate-required" id="city_field" data-o_class="form-row form-row-wide address-field validate-required">
+                      <label for="city">Town / City
                         <abbr class="required" title="required">*</abbr>
                       </label>
-                      <input type="text" class="input-text" placeholder="Town / City" value name="billing_city" id="billing_city">
+                      <input type="text" class="input-text" placeholder="Town / City" name="city" id="city">
                     </p>
 
-                    <p class="form-row form-row-first address-field validate-state" id="billing_state_field" data-o_class="form-row form-row-first address-field validate-state">
-                      <label for="billing_state">County</label>
-                      <input type="text" class="input-text" placeholder value name="billing_state" id="billing_state">
+                    <p class="form-row form-row-first address-field validate-state" id="state_field" data-o_class="form-row form-row-first address-field validate-state">
+                      <label for="country">County</label>
+                      <input type="text" class="input-text" placeholder name="country" id="country">
                     </p>
 
-                    <p class="form-row form-row-last address-field validate-required validate-postcode ecommerce-invalid ecommerce-invalid-required-field" id="billing_postcode_field" data-o_class="form-row form-row-last address-field validate-required validate-postcode">
-                      <label for="billing_postcode">Postcode
+                    <p class="form-row form-row-last address-field validate-required validate-postcode ecommerce-invalid ecommerce-invalid-required-field" id="postal_field" data-o_class="form-row form-row-last address-field validate-required validate-postcode">
+                      <label for="postal">Postcode
                         <abbr class="required" title="required">*</abbr>
                       </label>
-                      <input type="text" class="input-text" placeholder="Postcode" value name="billing_postcode" id="billing_postcode">
+                      <input type="text" class="input-text" placeholder="Postcode" name="postal" id="postal">
                     </p>
 
-                    <p class="form-row form-row-first validate-required validate-email" id="billing_email_field">
-                      <label for="billing_email">Email Address
+                    <p class="form-row form-row-first validate-required validate-email" id="email_field">
+                      <label for="email">Email Address
                         <abbr class="required" title="required">*</abbr>
                       </label>
-                      <input type="text" class="input-text" placeholder value name="billing_email" id="billing_email">
+                      <input type="text" class="input-text" placeholder name="email" id="email">
                     </p>
 
-                    <p class="form-row form-row-last validate-required validate-phone" id="billing_phone_field">
-                      <label for="billing_phone">Phone
+                    <p class="form-row form-row-last validate-required validate-phone" id="phone_field">
+                      <label for="phone">Phone
                         <abbr class="required" title="required">*</abbr>
                       </label>
-                      <input type="text" class="input-text" placeholder value name="billing_phone" id="billing_phone">
+                      <input type="text" class="input-text" placeholder name="phone" id="phone">
                     </p>
 
                     <div class="clear"></div>
@@ -88,9 +85,9 @@
                   <div class="clear"></div>
 
                   <div>
-                    <p class="form-row notes ecommerce-validated" id="order_comments_field">
+                    <p class="form-row notes ecommerce-validated" id="notes_field">
                       <label for="order_comments">Order Notes</label>
-                      <textarea name="order_comments" class="input-text" id="order_comments" placeholder="Notes about your order, e.g. special notes for delivery." rows="2" cols="6"></textarea>
+                      <textarea name="notes" class="input-text" id="notes" placeholder="Notes about your order, e.g. special notes for delivery." rows="2" cols="6"></textarea>
                     </p>
                   </div>
 
