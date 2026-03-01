@@ -30,12 +30,11 @@
                                     <th>#</th>
                                     <th>Client Info</th>
                                     <th>Order Info</th>
-                                    <th>Pick or Ship Info</th>
                                     <th>total</th>
+                                    <th>Notes</th>
                                     <th>Status</th>
                                     <th>Status Progress Bar</th>
                                     <th>Received at</th>
-                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,9 +47,8 @@
 
                                     <td>
                                         <div class="font-15">
-                                            {{ $order->name }}<br>
-                                            {{ $order->mobile }}<br>
-                                            {{ $order->email }}
+                                            {{ $order->email }}<br>
+                                            {{ $order->phone }}
                                         </div>
                                     </td>
 
@@ -66,9 +64,9 @@
                                         </div>
                                     </td>
 
-                                    <td>  <b> @if($order->pick_or_ship) shipping price ${{ $order->shipping_price}}  @else  Pickup  @endif  </b> </td>
-
                                     <td><strong>${{ $order->total }}</strong></td>
+                                    
+                                    <td><div class="font-15">{{ mb_substr($order->notes ,0,20 )}} @if (strlen($order->notes) > 20)...@endif</div></td>
 
                                     @php
                                     switch($order->status){
