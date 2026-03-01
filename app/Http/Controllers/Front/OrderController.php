@@ -40,33 +40,56 @@ class OrderController extends Controller
 
           if ($order->id) {
             if ($cartItems) {
-                foreach ($cartItems as $item) {
-                    $orderProduct = new Orders_products;
-                    $orderProduct->order_id = $order->id;
-                    $orderProduct->product_id = $item->product_id;
-                    $orderProduct->quantity = $item->quantity;
-                    $orderProduct->price = $item->product->price;
-                    $orderProduct->save();
-                    if ($orderProduct->id) {
-                        $cart = Cart::find($item->id);
-                        $cart->delete();
-                        $product = Product::find($item->product_id);
-                        $stock = $product->stock;
+                    foreach ($cartItems as $item) {
+                         $orderProduct = new Orders_products;
+                         $orderProduct->order_id = $order->id;
+                         $orderProduct->product_id = $item->product_id;
+                         $orderProduct->quantity = $item->quantity;
+                         $orderProduct->price = $item->product->price;
+                         $orderProduct->save();
+                         if ($orderProduct->id) {
+                         $cart = Cart::find($item->id);
+                         $cart->delete();
+                         $product = Product::find($item->product_id);
+                         $stock = $product->stock;
 
-                        if ($stock >= $item->quantity)
-                            $product->update(['stock' => $stock - $item->quantity]);
-                        else
-                            $product->update(['stock' => 0]);
+                         if ($stock >= $item->quantity)
+                              $product->update(['stock' => $stock - $item->quantity]);
+                         else
+                              $product->update(['stock' => 0]);
+                         }
+
                     }
 
-                }
+               }
 
-            }
+          }
 
-        }
-        
-     return view('front.success');
+          return view('front.success');
 
-}
+     }
+
+     /**
+     * Display a listing of the resource.
+     */
+     public function index()
+     {
+          $orders = Order::paginate(10, ['*'], 'orderpage');
+          return view('dashboard.orders.index', compact('orders'));
+     }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @param string $status
+     * @return \Illuminate\Routing\Redirector
+     */
+    public function changeOrderStatus($id, $status)
+    {
+        $order = Order::find($id);
+        $order->update(['status' => $status]);
+        return redirect()->back();
+    }
 
 }

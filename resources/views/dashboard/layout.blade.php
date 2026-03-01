@@ -58,7 +58,7 @@
                         <li class="g_heading">Home</li>
                         <li><a href="{{ route('dashboard') }}"><i class="fa fa-credit-card"></i><span>Dashboard</span></a></li>
                         <li><a href="{{ route('products.index') }}"><i class="fa fa-credit-card"></i><span>Products</span></a></li>
-
+                        <li><a href="{{ route('orders.index') }}"><i class="fa fa-credit-card"></i><span>Orders</span></a></li>
                     </ul>
                 </nav>
             </div>
