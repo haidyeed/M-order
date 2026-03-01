@@ -48,3 +48,6 @@ Route::group(['prefix' => 'admin','middleware' => ['auth', 'role:admin']], funct
 
     ]);
 });
+
+//logs viewer
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
