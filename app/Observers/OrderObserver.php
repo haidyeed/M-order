@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Order;
+use Illuminate\Support\Facades\Log;
 
 class OrderObserver
 {
@@ -21,7 +22,7 @@ class OrderObserver
     {
         //Note:: this is a very direct and simple observer to re-increase the product stock 
         //but it's not the best way for handling stock management and calculations
-        
+
         //TODO:: Here we need to handle some cases of re-changing the status more than once 
         // and if we need to empty the order_products in this case 
         // According to my code this will not be visible in dashboard anymore if deleted 
@@ -34,6 +35,8 @@ class OrderObserver
                 $product->stock += $product->pivot->quantity; 
                 $product->save(); 
             }
+            
+            Log::channel('order')->info("order refunded", ['orderId' => $order['id']]);
         }
     }
 
